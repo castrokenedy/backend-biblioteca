@@ -1,33 +1,32 @@
 package br.edu.biblioteca.structures;
 
 public class MinhaPilha<T> {
-    private class No {
-        T dado;
-        No proximo;
-        No(T dado) { this.dado = dado; }
-    }
+    private final Vetor<T> elementos = new Vetor<>();
 
-    private No topo;
-
-    public void push(T elemento) {
-        No novoNo = new No(elemento);
-        novoNo.proximo = topo;
-        topo = novoNo;
+    public void push(T valor) {
+        elementos.add(valor);
     }
 
     public T pop() {
-        if (isEmpty()) return null;
-        T dado = topo.dado;
-        topo = topo.proximo;
-        return dado;
+        if (isEmpty()) {
+            return null;
+        }
+        return elementos.remove(elementos.size() - 1);
     }
 
     public T peek() {
-        if (isEmpty()) return null;
-        return topo.dado;
+        if (isEmpty()) {
+            return null;
+        }
+        return elementos.get(elementos.size() - 1);
     }
 
     public boolean isEmpty() {
-        return topo == null;
+        return elementos.isEmpty();
+    }
+
+    public int size() {
+        return elementos.size();
     }
 }
+
