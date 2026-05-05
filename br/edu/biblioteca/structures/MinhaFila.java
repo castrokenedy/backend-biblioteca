@@ -1,33 +1,41 @@
 package br.edu.biblioteca.structures;
 
-public class MinhaPilha<T> {
+public class MinhaFila<T> {
     private class No {
         T dado;
         No proximo;
         No(T dado) { this.dado = dado; }
     }
 
-    private No topo;
+    private No inicio;
+    private No fim;
 
-    public void push(T elemento) {
+    public void enqueue(T elemento) {
         No novoNo = new No(elemento);
-        novoNo.proximo = topo;
-        topo = novoNo;
+        if (isEmpty()) {
+            inicio = novoNo;
+        } else {
+            fim.proximo = novoNo;
+        }
+        fim = novoNo;
     }
 
-    public T pop() {
+    public T dequeue() {
         if (isEmpty()) return null;
-        T dado = topo.dado;
-        topo = topo.proximo;
+        T dado = inicio.dado;
+        inicio = inicio.proximo;
+        if (inicio == null) {
+            fim = null;
+        }
         return dado;
     }
 
     public T peek() {
         if (isEmpty()) return null;
-        return topo.dado;
+        return inicio.dado;
     }
 
     public boolean isEmpty() {
-        return topo == null;
+        return inicio == null;
     }
 }
