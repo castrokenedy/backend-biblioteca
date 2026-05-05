@@ -4,7 +4,8 @@ public class ArvoreBST<K extends Comparable<K>, V> {
     private class No {
         K chave;
         V valor;
-        No esquerdo, direito;
+        No esquerda;
+        No direita;
 
         No(K chave, V valor) {
             this.chave = chave;
@@ -18,69 +19,63 @@ public class ArvoreBST<K extends Comparable<K>, V> {
         raiz = put(raiz, chave, valor);
     }
 
-    private No put(No no, K chave, V valor) {
-        if (no == null) return new No(chave, valor);
-        int cmp = chave.compareTo(no.chave);
-        if (cmp < 0) no.esquerdo = put(no.esquerdo, chave, valor);
-        else if (cmp > 0) no.direito = put(no.direito, chave, valor);
-        else no.valor = valor; 
-        return no;
+    private No put(No atual, K chave, V valor) {
+        if (atual == null) return new No(chave, valor);
+        int cmp = chave.compareTo(atual.chave);
+        if (cmp < 0) atual.esquerda = put(atual.esquerda, chave, valor);
+        else if (cmp > 0) atual.direita = put(atual.direita, chave, valor);
+        else atual.valor = valor;
+        return atual;
     }
 
     public V get(K chave) {
-        No no = get(raiz, chave);
-        return no == null ? null : no.valor;
-    }
-
-    private No get(No no, K chave) {
-        if (no == null) return null;
-        int cmp = chave.compareTo(no.chave);
-        if (cmp < 0) return get(no.esquerdo, chave);
-        else if (cmp > 0) return get(no.direito, chave);
-        else return no;
+        No atual = raiz;
+        while (atual != null) {
+            int cmp = chave.compareTo(atual.chave);
+            if (cmp == 0) return atual.valor;
+            atual = cmp < 0 ? atual.esquerda : atual.direita;
+        }
+        return null;
     }
 
     public void remove(K chave) {
         raiz = remove(raiz, chave);
     }
 
-    private No remove(No no, K chave) {
-        if (no == null) return null;
-        int cmp = chave.compareTo(no.chave);
+    private No remove(No atual, K chave) {
+        if (atual == null) return null;
+        int cmp = chave.compareTo(atual.chave);
         if (cmp < 0) {
-            no.esquerdo = remove(no.esquerdo, chave);
+            atual.esquerda = remove(atual.esquerda, chave);
         } else if (cmp > 0) {
-            no.direito = remove(no.direito, chave);
+            atual.direita = remove(atual.direita, chave);
         } else {
-            if (no.direito == null) return no.esquerdo;
-            if (no.esquerdo == null) return no.direito;
-            No t = no;
-            no = min(t.direito);
-            no.direito = deleteMin(t.direito);
-            no.esquerdo = t.esquerdo;
+            if (atual.esquerda == null) return atual.direita;
+            if (atual.direita == null) return atual.esquerda;
+            No sucessor = menor(atual.direita);
+            atual.chave = sucessor.chave;
+            atual.valor = sucessor.valor;
+            atual.direita = remove(atual.direita, sucessor.chave);
         }
+        return atual;
+    }
+
+    private No menor(No no) {
+        while (no.esquerda != null) no = no.esquerda;
         return no;
     }
 
-    private No min(No no) {
-        if (no.esquerdo == null) return no;
-        else return min(no.esquerdo);
+    public Vetor<V> inOrder() {
+        Vetor<V> resultado = new Vetor<>();
+        inOrder(raiz, resultado);
+        return resultado;
     }
 
-    private No deleteMin(No no) {
-        if (no.esquerdo == null) return no.direito;
-        no.esquerdo = deleteMin(no.esquerdo);
-        return no;
-    }
-
-    public void inOrder(Vetor<V> lista) {
-        inOrder(raiz, lista);
-    }
-
-    private void inOrder(No no, Vetor<V> lista) {
-        if (no == null) return;
-        inOrder(no.esquerdo, lista);
-        lista.add(no.valor);
-        inOrder(no.direito, lista);
+    private void inOrder(No no, Vetor<V> resultado) {
+        if (no != null) {
+            inOrder(no.esquerda, resultado);
+            resultado.add(no.valor);
+            inOrder(no.direita, resultado);
+        }
     }
 }
