@@ -1,67 +1,84 @@
 package br.edu.biblioteca.structures;
 
+@SuppressWarnings("unchecked")
 public class Vetor<T> {
     private T[] elementos;
-    private int tamanho;
-
-    @SuppressWarnings("unchecked")
-    public Vetor(int capacidade) {
-        this.elementos = (T[]) new Object[capacidade];
-        this.tamanho = 0;
-    }
+    private int size;
 
     public Vetor() {
         this(10);
     }
 
-    public boolean add(T elemento) {
+    public Vetor(int capacidadeInicial) {
+        this.elementos = (T[]) new Object[capacidadeInicial];
+        this.size = 0;
+    }
+
+    public void add(T elemento) {
         garantirCapacidade();
-        this.elementos[this.tamanho] = elemento;
-        this.tamanho++;
-        return true;
+        elementos[size++] = elemento;
     }
 
-    public T get(int posicao) {
-        if (!posicaoValida(posicao)) {
-            throw new IllegalArgumentException("Posição inválida");
-        }
-        return this.elementos[posicao];
+    public T get(int indice) {
+        validarIndice(indice);
+        return elementos[indice];
     }
 
-    public void set(int posicao, T elemento) {
-        if (!posicaoValida(posicao)) {
-            throw new IllegalArgumentException("Posição inválida");
-        }
-        this.elementos[posicao] = elemento;
+    public void set(int indice, T elemento) {
+        validarIndice(indice);
+        elementos[indice] = elemento;
     }
 
-    public void remove(int posicao) {
-        if (!posicaoValida(posicao)) {
-            throw new IllegalArgumentException("Posição inválida");
+    public T remove(int indice) {
+        validarIndice(indice);
+        T removido = elementos[indice];
+        for (int i = indice; i < size - 1; i++) {
+            elementos[i] = elementos[i + 1];
         }
-        for (int i = posicao; i < this.tamanho - 1; i++) {
-            this.elementos[i] = this.elementos[i + 1];
+        elementos[--size] = null;
+        return removido;
+    }
+
+    public boolean removeElemento(T elemento) {
+        int indice = indexOf(elemento);
+        if (indice >= 0) {
+            remove(indice);
+            return true;
         }
-        this.tamanho--;
-        this.elementos[tamanho] = null;
+        return false;
+    }
+
+    public int indexOf(T elemento) {
+        for (int i = 0; i < size; i++) {
+            if ((elementos[i] == null && elemento == null) || (elementos[i] != null && elementos[i].equals(elemento))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     public int size() {
-        return this.tamanho;
+        return size;
     }
 
-    private boolean posicaoValida(int posicao) {
-        return posicao >= 0 && posicao < tamanho;
-    }
-
-    @SuppressWarnings("unchecked")
     private void garantirCapacidade() {
-        if (this.tamanho == this.elementos.length) {
-            T[] elementosNovos = (T[]) new Object[this.elementos.length * 2];
-            for (int i = 0; i < this.elementos.length; i++) {
-                elementosNovos[i] = this.elementos[i];
+        if (size == elementos.length) {
+            T[] novo = (T[]) new Object[elementos.length * 2];
+            for (int i = 0; i < elementos.length; i++) {
+                novo[i] = elementos[i];
             }
-            this.elementos = elementosNovos;
+            elementos = novo;
+        }
+    }
+
+    private void validarIndice(int indice) {
+        if (indice < 0 || indice >= size) {
+            throw new IndexOutOfBoundsException("Índice inválido: " + indice);
         }
     }
 }
+
