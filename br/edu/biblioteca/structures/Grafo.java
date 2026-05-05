@@ -1,21 +1,28 @@
 package br.edu.biblioteca.structures;
 
 public class Grafo<T> {
-    private Vetor<T> vertices;
-    private Vetor<Vetor<Integer>> adjacencias;
+    private final Vetor<T> vertices = new Vetor<>();
+    private final Vetor<Vetor<Integer>> adjacencias = new Vetor<>();
 
-    public Grafo() {
-        vertices = new Vetor<>();
-        adjacencias = new Vetor<>();
-    }
-
-    public void addVertice(T dado) {
-        vertices.add(dado);
+    public void adicionarVertice(T valor) {
+        vertices.add(valor);
         adjacencias.add(new Vetor<>());
     }
 
-    public void addAresta(int origem, int destino) {
+    public void adicionarAresta(int origem, int destino) {
         adjacencias.get(origem).add(destino);
-        adjacencias.get(destino).add(origem);
+    }
+
+    public Vetor<Integer> vizinhos(int indice) {
+        return adjacencias.get(indice);
+    }
+
+    public T getVertice(int indice) {
+        return vertices.get(indice);
+    }
+
+    public int quantidadeVertices() {
+        return vertices.size();
     }
 }
+
