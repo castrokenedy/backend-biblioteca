@@ -1,41 +1,32 @@
 package br.edu.biblioteca.structures;
 
 public class MinhaFila<T> {
-    private class No {
-        T dado;
-        No proximo;
-        No(T dado) { this.dado = dado; }
-    }
+    private final Vetor<T> elementos = new Vetor<>();
 
-    private No inicio;
-    private No fim;
-
-    public void enqueue(T elemento) {
-        No novoNo = new No(elemento);
-        if (isEmpty()) {
-            inicio = novoNo;
-        } else {
-            fim.proximo = novoNo;
-        }
-        fim = novoNo;
+    public void enqueue(T valor) {
+        elementos.add(valor);
     }
 
     public T dequeue() {
-        if (isEmpty()) return null;
-        T dado = inicio.dado;
-        inicio = inicio.proximo;
-        if (inicio == null) {
-            fim = null;
+        if (isEmpty()) {
+            return null;
         }
-        return dado;
+        return elementos.remove(0);
     }
 
     public T peek() {
-        if (isEmpty()) return null;
-        return inicio.dado;
+        if (isEmpty()) {
+            return null;
+        }
+        return elementos.get(0);
     }
 
     public boolean isEmpty() {
-        return inicio == null;
+        return elementos.isEmpty();
+    }
+
+    public int size() {
+        return elementos.size();
     }
 }
+
