@@ -2,6 +2,12 @@
 
 Projeto base para a **primeira etapa** do trabalho de Estrutura de Dados.
 
+## Alunos
+- Ketleen de Souza Santos
+- Kenedy Anderson Souza de Castro
+- Jonas Guilhermino Nascimento
+- Gabriel Oliveira Ramos
+
 ## Pacotes
 - `br.edu.biblioteca.model`
 - `br.edu.biblioteca.structures`
