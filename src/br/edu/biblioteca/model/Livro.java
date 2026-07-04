@@ -37,7 +37,9 @@ public class Livro {
     public Vetor<String> getPalavrasChave() { return palavrasChave; }
     public void setPalavrasChave(Vetor<String> palavrasChave) { this.palavrasChave = palavrasChave; }
     public int getTotalEmprestimos() { return totalEmprestimos; }
+    public void setTotalEmprestimos(int totalEmprestimos) { this.totalEmprestimos = totalEmprestimos; }
     public void incrementarEmprestimos() { this.totalEmprestimos++; }
+    public void decrementarEmprestimos() { if (this.totalEmprestimos > 0) this.totalEmprestimos--; }
 
     @Override
     public String toString() {
