@@ -44,7 +44,6 @@ public class ReservaService {
         return reservas;
     }
 
-<<<<<<< HEAD
     public Reserva buscarPorId(int reservaId) {
         for (int i = 0; i < reservas.size(); i++) {
             if (reservas.get(i).getId() == reservaId) {
@@ -75,8 +74,6 @@ public class ReservaService {
         }
     }
 
-=======
->>>>>>> 24cefdf593e0554ca034471d6c0481e0de4dbfcb
     private FilaReservaPorLivro obterFila(String isbn) {
         for (int i = 0; i < filasPorLivro.size(); i++) {
             if (filasPorLivro.get(i).isbn.equals(isbn)) {

@@ -102,7 +102,6 @@ public class EmprestimoService {
     public Vetor<Multa> listarMultas() {
         return multas;
     }
-<<<<<<< HEAD
 
     /** Usado pela camada de persistência para repopular o serviço ao iniciar o sistema. */
     public void carregarEmprestimo(Emprestimo emprestimo) {
@@ -157,6 +156,4 @@ public class EmprestimoService {
             }
         }
     }
-=======
->>>>>>> 24cefdf593e0554ca034471d6c0481e0de4dbfcb
 }
