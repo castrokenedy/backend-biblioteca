@@ -1,15 +1,22 @@
 # Sistema de Biblioteca em Java
 
+<<<<<<< HEAD
 Projeto do trabalho de Estrutura de Dados — 1ª e 2ª etapa completas.
 
 ## Alunos
 
+=======
+Projeto base para a **primeira etapa** do trabalho de Estrutura de Dados.
+
+## Alunos
+>>>>>>> 24cefdf593e0554ca034471d6c0481e0de4dbfcb
 - Ketleen de Souza Santos
 - Kenedy Anderson Souza de Castro
 - Jonas Guilhermino Nascimento
 - Gabriel Oliveira Ramos
 
 ## Pacotes
+<<<<<<< HEAD
 
 - `br.edu.biblioteca.model` — entidades do domínio (Livro, Usuario, Emprestimo, Reserva, Multa, Notificacao, Exemplar, Autor, Categoria e enums de status)
 - `br.edu.biblioteca.structures` — estruturas de dados implementadas do zero (Vetor, MatrizInt, MinhaPilha, MinhaFila, ArvoreBST, Grafo, Ordenador)
@@ -62,3 +69,44 @@ Ao sair pela opção **0** do menu principal, os dados são salvos em `data/*.cs
 ## Observação
 
 Entrega completa da 1ª e 2ª etapa, conforme o Plano de Aprendizagem da disciplina.
+=======
+- `br.edu.biblioteca.model`
+- `br.edu.biblioteca.structures`
+- `br.edu.biblioteca.service`
+- `br.edu.biblioteca.app`
+
+## Estruturas implementadas
+- `Vetor<T>`
+- `MatrizInt`
+- `MinhaPilha<T>`
+- `MinhaFila<T>`
+- `ArvoreBST<K,V>`
+- `Grafo<T>`
+- `Ordenador`
+
+## Funcionalidades implementadas
+- Cadastro de livros
+- Cadastro de exemplares
+- Cadastro de usuários
+- Empréstimo de exemplar
+- Devolução de exemplar
+- Renovação
+- Cálculo de multa
+- Reserva de livros
+- Atendimento da próxima reserva
+- Relatórios iniciais
+- Undo/Redo básico com pilha
+
+## Como compilar
+```bash
+javac -d bin $(find src -name "*.java")
+```
+
+## Como executar
+```bash
+java -cp bin br.edu.biblioteca.app.Main
+```
+
+## Observação
+Esta entrega está focada na **primeira etapa** e serve como base para evolução no próximo bimestre.
+>>>>>>> 24cefdf593e0554ca034471d6c0481e0de4dbfcb

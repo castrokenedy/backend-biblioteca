@@ -5,6 +5,7 @@ import br.edu.biblioteca.structures.Vetor;
 
 public class UsuarioService {
     private final Vetor<Usuario> usuarios = new Vetor<>();
+<<<<<<< HEAD
     private int sequenciaUsuario = 1;
 
     public void cadastrarUsuario(Usuario usuario) {
@@ -16,6 +17,11 @@ public class UsuarioService {
 
     public int proximoId() {
         return sequenciaUsuario;
+=======
+
+    public void cadastrarUsuario(Usuario usuario) {
+        usuarios.add(usuario);
+>>>>>>> 24cefdf593e0554ca034471d6c0481e0de4dbfcb
     }
 
     public boolean bloquear(int usuarioId) {

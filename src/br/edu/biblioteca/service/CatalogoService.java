@@ -10,7 +10,10 @@ public class CatalogoService {
     private final Vetor<Livro> livros = new Vetor<>();
     private final Vetor<Exemplar> exemplares = new Vetor<>();
     private final ArvoreBST<String, Livro> indicePorIsbn = new ArvoreBST<>();
+<<<<<<< HEAD
     private int sequenciaExemplar = 1;
+=======
+>>>>>>> 24cefdf593e0554ca034471d6c0481e0de4dbfcb
 
     public void cadastrarLivro(Livro livro) {
         livros.add(livro);
@@ -19,6 +22,7 @@ public class CatalogoService {
 
     public void cadastrarExemplar(Exemplar exemplar) {
         exemplares.add(exemplar);
+<<<<<<< HEAD
         if (exemplar.getId() >= sequenciaExemplar) {
             sequenciaExemplar = exemplar.getId() + 1;
         }
@@ -36,6 +40,8 @@ public class CatalogoService {
             }
         }
         return false;
+=======
+>>>>>>> 24cefdf593e0554ca034471d6c0481e0de4dbfcb
     }
 
     public boolean remover(String isbn) {
